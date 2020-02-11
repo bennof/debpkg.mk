@@ -18,6 +18,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
+URL_MK?="https://raw.githubusercontent.com/bennof/debpkg.mk/master/debpkg.mk"
 BUILD_PATH?="./.build"
 INSTALL_PATH?="/usr/local/privatedeb/"
 SRCS?=$(shell ls -d */)
@@ -62,13 +63,15 @@ help:
 	@echo "Help debpkg.mk: "
 
 update:
-	@echo "missing ..."
+	@echo "updating"
+	wget $(URL_MK)  || curl -O $(URL_MK)
 
 init: 
 	apt-get install dpkg dpkg-dev gzip
 
 test:
 	@echo "Test:"
+	@echo "URL:          $(URL_MK)"
 	@echo "Build Path:   $(BUILD_PATH)"
 	@echo "Install Path: $(INSTALL_PATH)"
 	@echo "Sourece Dirs: $(SRCS)"
