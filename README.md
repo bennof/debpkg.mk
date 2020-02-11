@@ -49,7 +49,16 @@ $ make -f debpkg.mk build
 All packages are in `./.build/`.
 
 ### Install to a local repository
-*Testing this section*
+*Experimental*
+Just run:
+
+```sh
+$ sudo make -f debpkg.mk install
+$ apt-get update
+$ apt-cache search my_package
+> my_package - some description 
+```
+
 
 ## Create a Makefile / Config
 
@@ -57,8 +66,9 @@ You can create a Makefile after downloading `debpkg.mk`:
 
 ```
 # My Makefile
-BUILD_PATH:="some/path" # here are the created deb-files (INFO: this folder should not be detected by SRCS)
-INSTALL_PATH:="/some/path/to/private/repository" # here will the private repository be build
+BUILD_PATH:=some/path # here are the created deb-files (INFO: this folder should not be detected by SRCS)
+REP_NAME:=repository_name
+INSTALL_PATH:=/some/path/to/private/repository_name # here will the private repository be build
 SRCS:=my_package_1 my_package_2 # your packages 
 
 include debpkg.mk
