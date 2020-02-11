@@ -22,7 +22,7 @@ URL_MK?="https://raw.githubusercontent.com/bennof/debpkg.mk/master/debpkg.mk"
 BUILD_PATH?="./.build"
 INSTALL_PATH?="/usr/local/privatedeb/"
 SRCS?=$(shell ls -d */)
-DEBS?=$(SRCS:%/=BUILD_PATH/%.deb)
+DEBS?=$(SRCS:%/=$(BUILD_PATH)/%.deb)
 
 build: output_dir $(DEBS)
 
@@ -77,5 +77,5 @@ test:
 	@echo "Sourece Dirs: $(SRCS)"
 	@echo "deb-Files:    $(DEBS)"
 
-%.deb: %
+$(BUILD_PATH)/%.deb: %
 	dpkg-deb -b $< $(BUILD_PATH)
